@@ -1,0 +1,81 @@
+body{
+    display:flex;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+.calculator{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    width: 350px;
+    background-color:grey;
+    padding: 25px;
+    margin-top: 100px;
+    border-radius: 12px;    
+}
+
+.display{
+    background-color:darkgreen;
+    width: 90%;
+    height: 100px;
+    border-radius:8px;
+    border-style: solid;
+    border-color: black;
+    border-width:2px;
+    color: white;
+    font-size: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items:center;
+}
+
+.c_d{
+    margin-top: 5px;
+    width: 90%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.input{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+button{
+    width: 100px;
+    height: 60px;
+    margin: 5px;
+    border-radius:8px;
+    box-shadow: none;
+    border-color: black;
+    border-width:2px;   
+    font-size: 25px;
+}
+
+.clear{
+    width: 225px;
+}
+
+.del{
+    width: 225px;
+}
+
+.rowOne{
+    display: flex;
+    justify-content: space-between;
+}
+.rowTwo{
+    display: flex;
+    justify-content: space-between;
+}
+.rowThree{
+    display: flex;
+    justify-content: space-between;
+}
+.rowFour{
+    display: flex;
+    justify-content: space-between;
+}
