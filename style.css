@@ -18,7 +18,7 @@ body{
 .display{
     background-color:darkgreen;
     width: 90%;
-    height: 100px;
+    min-height: 100px;
     border-radius:8px;
     border-style: solid;
     border-color: black;
@@ -26,8 +26,13 @@ body{
     color: white;
     font-size: 60px;
     display: flex;
+    flex-direction:column;
     justify-content: flex-end;
-    align-items:center;
+    align-items:flex-end;
+    word-wrap:break-word;
+    word-break:break-all;
+    height:fit-content;
+
 }
 
 .c_d{
@@ -78,4 +83,21 @@ button{
 .rowFour{
     display: flex;
     justify-content: space-between;
+}
+
+.disBot{
+    display:flex;
+    justify-content:flex-end;
+    margin: 5px;
+    margin-bottom:0;
+    word-wrap:break-word;
+}
+
+.disTop{
+    font-size: 16px;
+    color:#d1d1d1;
+    display:flex;
+    justify-content: flex-end;
+    margin: 5px;
+    margin-top:1px;
 }
