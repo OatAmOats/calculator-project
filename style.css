@@ -85,19 +85,11 @@ button{
     justify-content: space-between;
 }
 
-.disBot{
-    display:flex;
-    justify-content:flex-end;
-    margin: 5px;
-    margin-bottom:0;
-    word-wrap:break-word;
+.userInput{
+    font-size: 20px;   
+    margin-right: 5px;
 }
-
-.disTop{
-    font-size: 16px;
-    color:#d1d1d1;
-    display:flex;
-    justify-content: flex-end;
-    margin: 5px;
-    margin-top:1px;
+.results{
+    min-height: 60px;
+    margin-right: 5px;
 }

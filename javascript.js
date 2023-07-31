@@ -2,6 +2,7 @@
 let userInput = document.querySelector('.userInput')
 let results = document.querySelector('.results')
 
+//num keys
 const one = document.querySelector('.one');
 const two = document.querySelector('.two');
 const three = document.querySelector('.three');
@@ -14,6 +15,7 @@ const nine = document.querySelector('.nine');
 const zero = document.querySelector('.zero');
 const point = document.querySelector('.point');
 
+//operation keys + equals
 const plus = document.querySelector('.plus');
 const minus = document.querySelector('.minus');
 const times = document.querySelector('.mult');
@@ -22,6 +24,8 @@ const equals = document.querySelector('.equals');
 
 const clr = document.querySelector('.clear')
 const del = document.querySelector('.del');
+
+let divByZero = false;
 
 add = function(a,b){
     console.log("hmm");
@@ -41,7 +45,9 @@ divide = function(a,b){
         return(Number(a)/Number(b));
     }
     else{
-        return("error");
+        divByZero = true;
+        return("bruh");
+        
     }
 }
 
@@ -63,18 +69,122 @@ operate = function(ui){
     }
 }
 
+checkLength = function(num){ 
+    if((num.toString()).length>8){
+        num = num.toExponential(4);
+    }
+    return(num);
+}
+checkOp = function(str){
+
+}
 numWrite = function(num){
-    userInput.textContent = userInput.textContent + String(num);
+    if(divByZero == false){
+        userInput.textContent = userInput.textContent + String(num);
+    }
+
+}
+
+opWrite = function(op){
+    if(divByZero == false){
+        const old = userInput.textContent.split(" ");
+        const opz = ["+", "-", "×", "÷"];
+        console.log(old);
+        console.log(opz);
+        let check = false;
+        for(let i = 0; i < 4; i++){
+            if(old.includes(opz[i])){
+                console.log("oh nooo there's already an operation going on");
+                check = true;
+            }
+        }
+        if(check == true){
+            newRes = checkLength(operate(userInput.textContent));
+            userInput.textContent = newRes + String(op);
+            results.textContent = newRes;
+    
+        }
+        else{
+            userInput.textContent = userInput.textContent + String(op);
+        }
+    }
 }
 
 calc = function(ui){
-    results.textContent = operate(ui);
+    resNum = operate(ui);
+    let resFixed;
+    if(divByZero==false){
+        resFixed = checkLength(resNum);
+        results.textContent = resFixed;
+    }
+    else{
+        results.textContent = resNum;
+    }
+    
+}
+
+clear = function(){
+    userInput.textContent = '';
+    results.textContent = '';
+    divByZero = false;
+}
+
+delLast = function(){
+    let old = userInput.textContent;
+    let arr = old.split('');
+    if(arr[arr.length-1] == " "){
+        arr.pop();
+        arr.pop();
+        arr.pop();
+    }
+    else{
+        arr.pop();
+    }
+    let deld = arr.toString().replaceAll(',', '');
+    userInput.textContent = deld;
 }
 
 clr.addEventListener('click', function(){
     userInput.textContent = '';
     results.textContent = '';
+    divByZero = false;
 })
+
+del.addEventListener('click', function(){
+    let old = userInput.textContent;
+    let arr = old.split('');
+    if(arr[arr.length-1] == " "){
+        arr.pop();
+        arr.pop();
+        arr.pop();
+    }
+    else{
+        arr.pop();
+    }
+    let deld = arr.toString().replaceAll(',', '');
+    userInput.textContent = deld;
+})
+
+keyboardStuff = function(e) {
+    if (e.key >= 0 && e.key <= 9) numWrite(e.key);
+    if (e.key === '.') numWrite('.');
+    if (e.key === '=' || e.key === 'Enter'){
+        calc(userInput.textContent);
+    }
+    if (e.key === 'Backspace') delLast();
+    if (e.key === 'Escape') clear();
+    if (e.key === '+' || e.key === '-'){
+        opWrite(` ${e.key} `);
+    }
+    
+    if(e.key === '*' || e.key === "x"){
+        opWrite(" × ");
+    }
+        
+    if(e.key === '/'){
+        opWrite(" ÷ ");
+    }
+  }
 
 one.addEventListener('click', function(){
     numWrite(1);
@@ -108,22 +218,25 @@ zero.addEventListener('click', function(){
 })
 
 plus.addEventListener('click', function(){
-    numWrite(" + ");
+    opWrite(" + ");
 } )
 minus.addEventListener('click', function(){
-    numWrite(" - ");
+    opWrite(" - ");
 } )
 times.addEventListener('click', function(){
-    numWrite(" × ");
+    opWrite(" × ");
 } )
 div.addEventListener('click', function(){
-    numWrite(" ÷ ");
+    opWrite(" ÷ ");
 } )
 
 equals.addEventListener('click', function(){
-    results.textContent = operate(userInput.textContent);
+    calc(userInput.textContent);
 })
+
 
 point.addEventListener('click', function(){
     numWrite(".");
 })
+
+window.addEventListener('keydown', keyboardStuff);
